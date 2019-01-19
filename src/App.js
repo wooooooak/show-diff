@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import axios from 'axios';
 
 import DiffViewer from './component/DiffViewer';
 import FolderList from './component/FolderList';
+import HomePage from './page/HomePage';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+	  margin: 0;
+  }
+`;
 
 class App extends Component {
 	state = {
@@ -11,13 +19,11 @@ class App extends Component {
 	};
 
 	onClickFile = async (cursor) => {
-		console.log(cursor);
 		const { data } = await axios.get('http://localhost:3001/diff_file', {
 			params: {
 				path: cursor.path
 			}
 		});
-		console.dir(data.content);
 		this.setState({
 			cursor,
 			content: data.content
@@ -27,13 +33,11 @@ class App extends Component {
 	render() {
 		const { cursor, content } = this.state;
 		return (
-			<React.Fragment>
-				<div className="App">
-					<FolderList onClickFile={this.onClickFile} />
-				</div>
+			<HomePage>
+				<GlobalStyle />
+				<FolderList onClickFile={this.onClickFile} />
 				<DiffViewer content={content} />
-				{/* <DiffViewer cursor={json으로된diff파일} /> */}
-			</React.Fragment>
+			</HomePage>
 		);
 	}
 }

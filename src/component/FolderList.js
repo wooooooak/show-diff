@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { Treebeard } from 'react-treebeard';
 import axios from 'axios';
+
+const ListContaineer = styled.div`
+	flex: 3;
+	height: 90vh;
+	overflow: scroll;
+	::-webkit-scrollbar {
+		width: 0px; /* 세로 스크롤 삭제 */
+		background: transparent; /* optional: just make scrollbar invisible */
+	}
+	/* optional: show position indicator in red */
+	::-webkit-scrollbar-thumb {
+		height: 5px;
+		background: #ff0000;
+	}
+	background-color: #21252b;
+`;
 
 class FolderList extends Component {
 	state = {};
@@ -33,13 +50,13 @@ class FolderList extends Component {
 
 	render() {
 		return (
-			<div>
+			<ListContaineer>
 				<Treebeard
 					data={this.state}
 					onToggle={this.onToggle}
 					clicked={this.onClickFile}
 				/>
-			</div>
+			</ListContaineer>
 		);
 	}
 }

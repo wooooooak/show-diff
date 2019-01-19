@@ -2,6 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`display: flex;`;
+
+const Pre = styled.pre`
+	flex: 7;
+	overflow: scroll;
+	height: 90vh;
+	::-webkit-scrollbar {
+		width: 10px; /* remove scrollbar space */
+		background: transparent; /* optional: just make scrollbar invisible */
+	}
+	/* optional: show position indicator in red */
+	::-webkit-scrollbar-thumb {
+		background: #ff0000;
+	}
+`;
+
 const LineCounter = styled.span`
 	background-color: ${(props) => props.backgroundColor};
 	padding-right: 3px;
@@ -37,7 +52,7 @@ const mapContentToTag = (contentArr) => {
 };
 
 const DiffViewer = ({ content }) => {
-	return <pre>{mapContentToTag(content)}</pre>;
+	return <Pre>{mapContentToTag(content)}</Pre>;
 };
 
 export default DiffViewer;
