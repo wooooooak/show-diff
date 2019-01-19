@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const DiffViewer = ({ cursor }) => {
-	if (cursor) {
-		console.log(cursor.type);
-	}
-	return <div>{JSON.stringify(cursor)}</div>;
+const mapContentToTag = (contentArr) => {
+	return contentArr.map((str, index) => {
+		return <pre key={index}>{str}</pre>;
+	});
+};
+
+const DiffViewer = ({ content }) => {
+	return <div>{mapContentToTag(content)}</div>;
 };
 
 export default DiffViewer;

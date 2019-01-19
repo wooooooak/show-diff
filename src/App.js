@@ -6,7 +6,8 @@ import FolderList from './component/FolderList';
 
 class App extends Component {
 	state = {
-		cursor: {}
+		cursor: {},
+		content: []
 	};
 
 	onClickFile = async (cursor) => {
@@ -16,19 +17,21 @@ class App extends Component {
 				path: cursor.path
 			}
 		});
+		console.dir(data);
 		this.setState({
-			cursor
+			cursor,
+			content: data.content
 		});
 	};
 
 	render() {
-		const { cursor } = this.state;
+		const { cursor, content } = this.state;
 		return (
 			<React.Fragment>
 				<div className="App">
 					<FolderList onClickFile={this.onClickFile} />
 				</div>
-				<DiffViewer cursor={cursor} />
+				<DiffViewer content={content} />
 				{/* <DiffViewer cursor={json으로된diff파일} /> */}
 			</React.Fragment>
 		);
