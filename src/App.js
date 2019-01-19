@@ -1,41 +1,36 @@
 import React, { Component } from 'react';
-import { Treebeard } from 'react-treebeard';
 import axios from 'axios';
+
+import DiffViewer from './component/DiffViewer';
+import FolderList from './component/FolderList';
 
 class App extends Component {
 	state = {
-		tree: {}
+		cursor: {}
 	};
 
-	componentDidMount = async () => {
-		const { data } = await axios.get('http://localhost:3000/a');
-		console.log(data.data);
+	onClickFile = async (cursor) => {
+		console.log(cursor);
+		const { data } = await axios.get('http://localhost:3000/diff_file', {
+			params: {
+				path: cursor.path
+			}
+		});
 		this.setState({
-			...this.state,
-			tree: data.data
+			cursor
 		});
 	};
 
-	onToggle = (node, toggled) => {
-		if (this.state.tree.cursor) {
-			const newState = this.state;
-			newState.tree.cursor.active = false;
-			this.setState({
-				newState
-			});
-		}
-		node.active = true;
-		if (node.children) {
-			node.toggled = toggled;
-		}
-		this.setState({ cursor: node });
-	};
-
 	render() {
+		const { cursor } = this.state;
 		return (
-			<div className="App">
-				<Treebeard data={this.state.tree} onToggle={this.onToggle} />
-			</div>
+			<React.Fragment>
+				<div className="App">
+					<FolderList onClickFile={this.onClickFile} />
+				</div>
+				<DiffViewer cursor={cursor} />
+				{/* <DiffViewer cursor={json으로된diff파일} /> */}
+			</React.Fragment>
 		);
 	}
 }
