@@ -5,6 +5,7 @@ import axios from 'axios';
 import DiffViewer from './component/DiffViewer';
 import FolderList from './component/FolderList';
 import HomePage from './page/HomePage';
+import Summary from './component/Summary';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,7 +16,16 @@ const GlobalStyle = createGlobalStyle`
 class App extends Component {
 	state = {
 		cursor: {},
-		content: []
+		content: [],
+		summary: {}
+	};
+
+	componentDidMount = async () => {
+		const { data } = await axios.get('http://localhost:3001/summary');
+		console.log(data);
+		this.setState({
+			summary: data
+		});
 	};
 
 	onClickFile = async (cursor) => {
@@ -31,10 +41,12 @@ class App extends Component {
 	};
 
 	render() {
-		const { cursor, content } = this.state;
+		const { cursor, content, summary } = this.state;
+		console.log(summary);
 		return (
 			<HomePage>
 				<GlobalStyle />
+				<Summary summary={summary} />
 				<FolderList onClickFile={this.onClickFile} />
 				<DiffViewer content={content} />
 			</HomePage>

@@ -23,8 +23,8 @@ class FolderList extends Component {
 	state = {};
 
 	componentDidMount = async () => {
-		const { data } = await axios.get('http://localhost:3001/');
-		this.setState(data.data);
+		const { data } = await axios.get('http://localhost:3001/tree');
+		this.setState(data.tree);
 	};
 
 	onToggle = (node, toggled) => {
