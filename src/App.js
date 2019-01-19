@@ -12,12 +12,12 @@ class App extends Component {
 
 	onClickFile = async (cursor) => {
 		console.log(cursor);
-		const { data } = await axios.get('http://localhost:3000/diff_file', {
+		const { data } = await axios.get('http://localhost:3001/diff_file', {
 			params: {
 				path: cursor.path
 			}
 		});
-		console.dir(data);
+		console.dir(data.content);
 		this.setState({
 			cursor,
 			content: data.content

@@ -6,7 +6,7 @@ class FolderList extends Component {
 	state = {};
 
 	componentDidMount = async () => {
-		const { data } = await axios.get('http://localhost:3000/');
+		const { data } = await axios.get('http://localhost:3001/');
 		this.setState(data.data);
 	};
 
