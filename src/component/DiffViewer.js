@@ -6,6 +6,7 @@ const Container = styled.div`display: flex;`;
 const Pre = styled.pre`
 	flex: 8;
 	height: 87vh;
+	margin-right: 1em;
 	overflow: scroll;
 	background-color: #fffff3;
 	::-webkit-scrollbar {

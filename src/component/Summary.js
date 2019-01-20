@@ -6,7 +6,6 @@ const Wrapper = styled.div`
 	width: 100vh;
 	text-align: center;
 	margin: 0 auto;
-	/* height: 10vh; */
 	display: flex;
 	justify-content: center;
 `;
@@ -34,12 +33,11 @@ const ModCircle = styled(Circle)`
 `;
 
 const mapSummaryToCircle = (summary) => {
-	const totalCount = summary['total'];
 	return Object.keys(summary).map((info, index) => {
 		if (index === 0) {
 			// add
 			return (
-				<AddCircle size={summary[info] / totalCount * 15}>
+				<AddCircle>
 					<CountUp
 						start={0}
 						end={summary[info]}
@@ -51,7 +49,7 @@ const mapSummaryToCircle = (summary) => {
 			);
 		} else if (index === 1) {
 			return (
-				<DelCircle size={summary[info] / totalCount * 15}>
+				<DelCircle>
 					<CountUp
 						start={0}
 						end={summary[info]}
@@ -63,7 +61,7 @@ const mapSummaryToCircle = (summary) => {
 			);
 		} else if (index === 2) {
 			return (
-				<ModCircle size={summary[info] / totalCount * 15}>
+				<ModCircle>
 					<CountUp
 						start={0}
 						end={summary[info]}
