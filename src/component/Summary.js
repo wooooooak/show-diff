@@ -36,7 +36,6 @@ const ModCircle = styled(Circle)`
 const mapSummaryToCircle = (summary) => {
 	const totalCount = summary['total'];
 	return Object.keys(summary).map((info, index) => {
-		console.log(summary[info] / totalCount);
 		if (index === 0) {
 			// add
 			return (

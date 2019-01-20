@@ -29,13 +29,6 @@ class FolderList extends Component {
 	};
 
 	onToggle = (node, toggled) => {
-		if (this.state.cursor) {
-			const newState = this.state;
-			newState.cursor.active = false;
-			this.setState({
-				newState
-			});
-		}
 		node.active = true;
 		if (node.children) {
 			// 디렉터리일 경우 toggle하는 것
@@ -45,8 +38,8 @@ class FolderList extends Component {
 		newState.cursor = node;
 		if (node.type === 'file') {
 			this.props.onClickFile(node);
-			this.setState({ cursor: node });
 		}
+		this.setState({ cursor: node });
 	};
 
 	render() {
