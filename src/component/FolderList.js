@@ -4,8 +4,9 @@ import { Treebeard } from 'react-treebeard';
 import axios from 'axios';
 
 const ListContaineer = styled.div`
-	flex: 3;
+	flex: 2;
 	height: 90vh;
+	padding-left: 1em;
 	overflow: scroll;
 	::-webkit-scrollbar {
 		width: 0px; /* 세로 스크롤 삭제 */

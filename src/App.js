@@ -10,6 +10,7 @@ import Summary from './component/Summary';
 const GlobalStyle = createGlobalStyle`
   body {
 	  margin: 0;
+	  background-color: #21252B;
   }
 `;
 
@@ -22,7 +23,6 @@ class App extends Component {
 
 	componentDidMount = async () => {
 		const { data } = await axios.get('http://localhost:3001/summary');
-		console.log(data);
 		this.setState({
 			summary: data
 		});
@@ -41,15 +41,17 @@ class App extends Component {
 	};
 
 	render() {
-		const { cursor, content, summary } = this.state;
-		console.log(summary);
+		const { content, summary } = this.state;
 		return (
-			<HomePage>
-				<GlobalStyle />
+			<div>
 				<Summary summary={summary} />
-				<FolderList onClickFile={this.onClickFile} />
-				<DiffViewer content={content} />
-			</HomePage>
+
+				<HomePage>
+					<GlobalStyle />
+					<FolderList onClickFile={this.onClickFile} />
+					<DiffViewer content={content} />
+				</HomePage>
+			</div>
 		);
 	}
 }

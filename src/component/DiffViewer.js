@@ -4,9 +4,10 @@ import styled from 'styled-components';
 const Container = styled.div`display: flex;`;
 
 const Pre = styled.pre`
-	flex: 7;
+	flex: 8;
+	height: 87vh;
 	overflow: scroll;
-	height: 90vh;
+	background-color: #fffff3;
 	::-webkit-scrollbar {
 		width: 10px; /* remove scrollbar space */
 		background: transparent; /* optional: just make scrollbar invisible */
