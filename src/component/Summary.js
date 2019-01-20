@@ -6,6 +6,7 @@ const Wrapper = styled.div`
 	width: 100vh;
 	text-align: center;
 	margin: 0 auto;
+	margin-top: 15px;
 	display: flex;
 	justify-content: center;
 `;

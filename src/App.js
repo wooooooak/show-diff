@@ -18,6 +18,7 @@ class App extends Component {
 	state = {
 		cursor: {},
 		content: [],
+		diffLoading: false,
 		summary: {}
 	};
 
@@ -29,6 +30,9 @@ class App extends Component {
 	};
 
 	onClickFile = async (cursor) => {
+		this.setState({
+			diffLoading: true
+		});
 		const { data } = await axios.get('http://localhost:3001/diff_file', {
 			params: {
 				path: cursor.path
@@ -36,12 +40,14 @@ class App extends Component {
 		});
 		this.setState({
 			cursor,
-			content: data.content
+			content: data.content,
+			diffLoading: false
 		});
 	};
 
 	render() {
-		const { content, summary } = this.state;
+		console.log(this.state.diffLoading);
+		const { content, summary, diffLoading } = this.state;
 		return (
 			<div>
 				<Summary summary={summary} />
@@ -49,7 +55,7 @@ class App extends Component {
 				<HomePage>
 					<GlobalStyle />
 					<FolderList onClickFile={this.onClickFile} />
-					<DiffViewer content={content} />
+					<DiffViewer content={content} loading={diffLoading} />
 				</HomePage>
 			</div>
 		);

@@ -19,14 +19,21 @@ const Pre = styled.pre`
 	}
 `;
 
+const LoadingBox = styled(Pre)`
+	margin: 0 auto;
+	text-align: center;
+`;
+
 const LineCounter = styled.span`
 	background-color: ${(props) => props.backgroundColor};
 	padding-right: 3px;
 `;
+
 const StringContent = styled.span`
 	background-color: ${(props) => props.backgroundColor};
 	width: 100%;
 `;
+
 const mapContentToTag = (contentArr) => {
 	return contentArr.map((content, index) => {
 		const { v1Line, v2Line, symbol, string } = content;
@@ -53,8 +60,13 @@ const mapContentToTag = (contentArr) => {
 	});
 };
 
-const DiffViewer = ({ content }) => {
-	return <Pre>{mapContentToTag(content)}</Pre>;
+const DiffViewer = ({ content, loading }) => {
+	console.log(content);
+	return loading ? (
+		<LoadingBox> hello </LoadingBox>
+	) : (
+		<Pre>{mapContentToTag(content)}</Pre>
+	);
 };
 
 export default DiffViewer;
