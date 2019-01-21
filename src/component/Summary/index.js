@@ -8,7 +8,7 @@ const mapSummaryToCircle = (summary, onChangeMode) => {
     if (index === 0) {
       // add
       return (
-        <style.AddCircle onClick={() => onChangeMode("del")}>
+        <style.AddCircle key={index} onClick={() => onChangeMode("del")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -20,7 +20,7 @@ const mapSummaryToCircle = (summary, onChangeMode) => {
       );
     } else if (index === 1) {
       return (
-        <style.DelCircle onClick={() => onChangeMode("add")}>
+        <style.DelCircle key={index} onClick={() => onChangeMode("add")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -32,7 +32,7 @@ const mapSummaryToCircle = (summary, onChangeMode) => {
       );
     } else if (index === 2) {
       return (
-        <style.ModCircle onClick={() => onChangeMode("mod")}>
+        <style.ModCircle key={index} onClick={() => onChangeMode("mod")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -52,7 +52,7 @@ const Summary = ({ summary, onChangeMode }) => {
       <style.Wrapper>{mapSummaryToCircle(summary, onChangeMode)}</style.Wrapper>
     );
   } else {
-    return null;
+    return <div />;
   }
 };
 

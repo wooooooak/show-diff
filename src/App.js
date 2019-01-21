@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
 class App extends Component {
   state = {
+    initTree: {},
     cursor: {},
     content: [],
     diffLoading: false,
@@ -27,13 +28,16 @@ class App extends Component {
   componentDidMount = async () => {
     const { data } = await axios.get("http://localhost:3001/summary");
     const treeData = await axios.get(`http://localhost:3001/list/mod`);
+    const newTree = treeData.data.tree;
+    newTree.toggled = true;
     this.setState({
       summary: data,
-      tree: treeData.data.tree
+      tree: newTree,
+      initTree: newTree
     });
   };
 
-  onClickFile = async cursor => {
+  onClickLeafFile = async cursor => {
     this.setState({
       diffLoading: true
     });
@@ -54,21 +58,38 @@ class App extends Component {
     this.setState({
       mode,
       tree: data.tree,
+      initTree: data.tree,
       content: []
     });
   };
 
+  onFilter = filtered => {
+    this.setState({
+      tree: filtered
+    });
+  };
+
   render() {
-    const { content, summary, diffLoading, mode, tree } = this.state;
+    const { content, summary, diffLoading, mode, tree, initTree } = this.state;
     return (
       <div>
         <Summary summary={summary} onChangeMode={this.onChangeMode} />
 
         <HomePage>
           <GlobalStyle />
-          <FolderList onClickFile={this.onClickFile} mode={mode} tree={tree} />
+          <FolderList
+            onClickFile={this.onClickLeafFile}
+            onFilter={this.onFilter}
+            mode={mode}
+            tree={tree}
+            initTree={initTree}
+          />
           <DiffViewer content={content} loading={diffLoading} />
-          <FolderList onClickFile={this.onClickFile} mode={mode} tree={{}} />
+          <FolderList
+            onClickFile={this.onClickLeafFile}
+            mode={mode}
+            tree={{}}
+          />
         </HomePage>
       </div>
     );

@@ -22,7 +22,7 @@ class FolderList extends Component {
   render() {
     return (
       <style.ListContaineer>
-        <Search />
+        <Search initTree={this.props.initTree} onFilter={this.props.onFilter} />
         <Treebeard
           data={this.props.tree}
           onToggle={this.onToggle}
