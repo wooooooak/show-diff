@@ -21,13 +21,13 @@ const filterTree = (node, filter, matcher = defaultMatcher) => {
   const filtered = node.children
     .filter(child => findNode(child, filter, matcher))
     .map(child => filterTree(child, filter, matcher));
-  return Object.assign({}, node, { children: filtered });
+  return { ...node, children: filtered };
 };
 
 const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
   let children = node.children;
   if (!children || children.length === 0) {
-    return Object.assign({}, node, { toggled: false });
+    return { ...node, toggled: false };
   }
   const childrenWithMatches = node.children.filter(child =>
     findNode(child, filter, matcher)
@@ -38,10 +38,7 @@ const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
       return expandFilteredNodes(child, filter, matcher);
     });
   }
-  return Object.assign({}, node, {
-    children: children,
-    toggled: shouldExpand
-  });
+  return;
 };
 
 const onFilterMouseUp = (e, initTree, onFilter) => {
@@ -62,7 +59,6 @@ const SearchBox = ({ initTree, onFilter }) => {
     <style.InputWrapper>
       <style.Input
         type="text"
-        // onKeyUp={e => onFilterMouseUp(e, initTree, onFilter)}
         onKeyPress={e => onFilterMouseUp(e, initTree, onFilter)}
         placeholder="파일명을 입력하세요."
       />
