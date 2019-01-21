@@ -57,7 +57,7 @@ const onFilterMouseUp = (e, initTree, onFilter) => {
   }
 };
 
-const Search = ({ initTree, onFilter }) => {
+const SearchBox = ({ initTree, onFilter }) => {
   return (
     <style.InputWrapper>
       <style.Input
@@ -73,4 +73,4 @@ const Search = ({ initTree, onFilter }) => {
   );
 };
 
-export default Search;
+export default SearchBox;

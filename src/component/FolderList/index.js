@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Treebeard } from "react-treebeard";
 
 import * as style from "./style";
-import Search from "../Search";
+import SearchBox from "../SearchBox";
 
 class FolderList extends Component {
   onToggle = (node, toggled) => {
@@ -22,7 +22,10 @@ class FolderList extends Component {
   render() {
     return (
       <style.ListContaineer>
-        <Search initTree={this.props.initTree} onFilter={this.props.onFilter} />
+        <SearchBox
+          initTree={this.props.initTree}
+          onFilter={this.props.onFilter}
+        />
         <Treebeard
           data={this.props.tree}
           onToggle={this.onToggle}
