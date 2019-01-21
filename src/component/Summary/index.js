@@ -1,43 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 import CountUp from "react-countup";
 
-const Wrapper = styled.div`
-  width: 100vh;
-  text-align: center;
-  margin: 0 auto;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-`;
-
-const Circle = styled.div`
-  @import url("https://fonts.googleapis.com/css?family=Nanum+Gothic:700");
-  font-family: "Nanum Gothic", sans-serif;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 10px 10px;
-  width: 10em;
-  font-size: 2em;
-  background-color: #efffe9;
-`;
-
-const AddCircle = styled(Circle)`
-  background-color: #ee7785;
-`;
-const DelCircle = styled(Circle)`
-  /* background-color: #FFFFF2; */
-`;
-const ModCircle = styled(Circle)`
-  background-color: #fffff2;
-`;
+import * as style from "./style";
 
 const mapSummaryToCircle = (summary, onClickMode) => {
   return Object.keys(summary).map((info, index) => {
     if (index === 0) {
       // add
       return (
-        <AddCircle onClick={() => onClickMode("del")}>
+        <style.AddCircle onClick={() => onClickMode("del")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -45,11 +16,11 @@ const mapSummaryToCircle = (summary, onClickMode) => {
             prefix="삭제 "
             suffix="개"
           />
-        </AddCircle>
+        </style.AddCircle>
       );
     } else if (index === 1) {
       return (
-        <DelCircle onClick={() => onClickMode("add")}>
+        <style.DelCircle onClick={() => onClickMode("add")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -57,11 +28,11 @@ const mapSummaryToCircle = (summary, onClickMode) => {
             prefix="추가 "
             suffix="개"
           />
-        </DelCircle>
+        </style.DelCircle>
       );
     } else if (index === 2) {
       return (
-        <ModCircle onClick={() => onClickMode("mod")}>
+        <style.ModCircle onClick={() => onClickMode("mod")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -69,7 +40,7 @@ const mapSummaryToCircle = (summary, onClickMode) => {
             prefix="수정 "
             suffix="개"
           />
-        </ModCircle>
+        </style.ModCircle>
       );
     }
   });
@@ -77,7 +48,9 @@ const mapSummaryToCircle = (summary, onClickMode) => {
 
 const Summary = ({ summary, onClickMode }) => {
   if (summary) {
-    return <Wrapper>{mapSummaryToCircle(summary, onClickMode)}</Wrapper>;
+    return (
+      <style.Wrapper>{mapSummaryToCircle(summary, onClickMode)}</style.Wrapper>
+    );
   } else {
     return null;
   }
