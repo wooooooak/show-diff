@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Search } from "styled-icons/boxicons-regular/Search";
 
+const serachBoxColor = "#008c9e";
+
 export const SearchIcon = styled(Search)`
   color: white;
 `;
@@ -17,7 +19,7 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 80%;
-  border: 5px solid #00b4cc;
+  border: 5px solid ${serachBoxColor};
   padding: 5px;
   height: 20px;
   border-radius: 5px;
@@ -25,16 +27,18 @@ export const Input = styled.input`
   color: #9dbfaf;
 
   &:focus {
-    color: #00b4cc;
+    color: ${serachBoxColor};
   }
 `;
 
 export const Button = styled.button`
   position: relative;
-  background-color: #00b4cc;
+  background-color: ${serachBoxColor};
   outline: none;
   border: none;
   height: 3em;
   right: 5px;
   width: 3em;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 `;
