@@ -3,12 +3,12 @@ import CountUp from "react-countup";
 
 import * as style from "./style";
 
-const mapSummaryToCircle = (summary, onClickMode) => {
+const mapSummaryToCircle = (summary, onChangeMode) => {
   return Object.keys(summary).map((info, index) => {
     if (index === 0) {
       // add
       return (
-        <style.AddCircle onClick={() => onClickMode("del")}>
+        <style.AddCircle onClick={() => onChangeMode("del")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -20,7 +20,7 @@ const mapSummaryToCircle = (summary, onClickMode) => {
       );
     } else if (index === 1) {
       return (
-        <style.DelCircle onClick={() => onClickMode("add")}>
+        <style.DelCircle onClick={() => onChangeMode("add")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -32,7 +32,7 @@ const mapSummaryToCircle = (summary, onClickMode) => {
       );
     } else if (index === 2) {
       return (
-        <style.ModCircle onClick={() => onClickMode("mod")}>
+        <style.ModCircle onClick={() => onChangeMode("mod")}>
           <CountUp
             start={0}
             end={summary[info]}
@@ -46,10 +46,10 @@ const mapSummaryToCircle = (summary, onClickMode) => {
   });
 };
 
-const Summary = ({ summary, onClickMode }) => {
+const Summary = ({ summary, onChangeMode }) => {
   if (summary) {
     return (
-      <style.Wrapper>{mapSummaryToCircle(summary, onClickMode)}</style.Wrapper>
+      <style.Wrapper>{mapSummaryToCircle(summary, onChangeMode)}</style.Wrapper>
     );
   } else {
     return null;

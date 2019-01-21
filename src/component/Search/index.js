@@ -1,1 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
+
+const Search = () => {
+  return <input type="text" />;
+};
+
+export default Search;

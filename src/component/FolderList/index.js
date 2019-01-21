@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Treebeard } from "react-treebeard";
 
 import * as style from "./style";
+import Search from "../Search";
 
 class FolderList extends Component {
   onToggle = (node, toggled) => {
@@ -21,6 +22,7 @@ class FolderList extends Component {
   render() {
     return (
       <style.ListContaineer>
+        <Search />
         <Treebeard
           data={this.props.tree}
           onToggle={this.onToggle}

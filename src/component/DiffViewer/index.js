@@ -4,8 +4,8 @@ import * as styled from "./style";
 const mapContentToTag = contentArr => {
   return contentArr.map((content, index) => {
     const { v1Line, v2Line, symbol, string } = content;
-    let lineCounterColor = "#FFFFF3";
-    let contentColor = "#FFFFF3";
+    let lineCounterColor = "#f4f5f9";
+    let contentColor = "#f4f5f9";
     if (symbol === "+") {
       lineCounterColor = "#9DC3C1";
       contentColor = "#D8E6E7";
@@ -27,12 +27,13 @@ const mapContentToTag = contentArr => {
   });
 };
 
+// const show
+
 const DiffViewer = ({ content, loading }) => {
-  return loading ? (
-    <styled.LoadingBox> hello </styled.LoadingBox>
-  ) : (
-    <styled.Pre>{mapContentToTag(content)}</styled.Pre>
-  );
+  if (loading) {
+    return <styled.LoadingBox> hello </styled.LoadingBox>;
+  }
+  return <styled.Pre>{mapContentToTag(content)}</styled.Pre>;
 };
 
 export default DiffViewer;

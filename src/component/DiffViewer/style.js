@@ -5,11 +5,11 @@ export const Container = styled.div`
 `;
 
 export const Pre = styled.pre`
-  flex: 8;
+  flex: 6;
   height: 87vh;
   margin-right: 1em;
   overflow: scroll;
-  background-color: #fffff3;
+  background-color: #f4f5f9;
   ::-webkit-scrollbar {
     width: 10px; /* remove scrollbar space */
     background: transparent; /* optional: just make scrollbar invisible */

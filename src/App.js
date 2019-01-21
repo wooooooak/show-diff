@@ -49,25 +49,26 @@ class App extends Component {
     });
   };
 
-  onClickMode = async mode => {
+  onChangeMode = async mode => {
     const { data } = await axios.get(`http://localhost:3001/list/${mode}`);
     this.setState({
       mode,
-      tree: data.tree
+      tree: data.tree,
+      content: []
     });
   };
 
   render() {
-    console.log(this.state.diffLoading);
     const { content, summary, diffLoading, mode, tree } = this.state;
     return (
       <div>
-        <Summary summary={summary} onClickMode={this.onClickMode} />
+        <Summary summary={summary} onChangeMode={this.onChangeMode} />
 
         <HomePage>
           <GlobalStyle />
           <FolderList onClickFile={this.onClickFile} mode={mode} tree={tree} />
           <DiffViewer content={content} loading={diffLoading} />
+          <FolderList onClickFile={this.onClickFile} mode={mode} tree={{}} />
         </HomePage>
       </div>
     );
