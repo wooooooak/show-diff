@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-class App extends Component {
+class AppContainer extends Component {
   state = {
     initTree: {},
     cursor: {},
@@ -96,4 +96,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppContainer;

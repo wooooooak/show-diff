@@ -45,14 +45,16 @@ const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
 };
 
 const onFilterMouseUp = (e, initTree, onFilter) => {
-  const filterName = e.target.value.trim();
-  if (!filterName) {
-    // 없으면 처음 쌩 데이터를 받아와야 한다
-    return onFilter(initTree);
+  if (e.charCode === 13) {
+    const filterName = e.target.value.trim();
+    if (!filterName) {
+      // 없으면 처음 쌩 데이터를 받아와야 한다
+      return onFilter(initTree);
+    }
+    let filtered = filterTree(initTree, filterName);
+    filtered = expandFilteredNodes(filtered, filterName);
+    onFilter(filtered);
   }
-  var filtered = filterTree(initTree, filterName);
-  filtered = expandFilteredNodes(filtered, filterName);
-  onFilter(filtered);
 };
 
 const Search = ({ initTree, onFilter }) => {
@@ -60,8 +62,9 @@ const Search = ({ initTree, onFilter }) => {
     <style.InputWrapper>
       <style.Input
         type="text"
-        onKeyUp={e => onFilterMouseUp(e, initTree, onFilter)}
-        placeholder="Input!"
+        // onKeyUp={e => onFilterMouseUp(e, initTree, onFilter)}
+        onKeyPress={e => onFilterMouseUp(e, initTree, onFilter)}
+        placeholder="파일명을 입력하세요."
       />
       <style.Button>
         <style.SearchIcon />
