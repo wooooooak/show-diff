@@ -5,7 +5,7 @@ import * as style from "./style";
 
 const mapSummaryToCircle = (summary, onChangeMode) => {
   return Object.keys(summary).map((info, index) => {
-    if (index === 0) {
+    if (info === "delFiles") {
       // add
       return (
         <style.AddCircle key={index} onClick={() => onChangeMode("del")}>
@@ -18,7 +18,7 @@ const mapSummaryToCircle = (summary, onChangeMode) => {
           />
         </style.AddCircle>
       );
-    } else if (index === 1) {
+    } else if (info === "addFiles") {
       return (
         <style.DelCircle key={index} onClick={() => onChangeMode("add")}>
           <CountUp
@@ -30,7 +30,7 @@ const mapSummaryToCircle = (summary, onChangeMode) => {
           />
         </style.DelCircle>
       );
-    } else if (index === 2) {
+    } else if (info === "modFiles") {
       return (
         <style.ModCircle key={index} onClick={() => onChangeMode("mod")}>
           <CountUp

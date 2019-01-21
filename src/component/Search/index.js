@@ -1,4 +1,5 @@
 import React from "react";
+import * as style from "./style";
 
 const defaultMatcher = (filterText, node) => {
   return node.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;
@@ -6,19 +7,17 @@ const defaultMatcher = (filterText, node) => {
 
 const findNode = (node, filter, matcher) => {
   return (
-    matcher(filter, node) || // i match
-    (node.children && // or i have decendents and one of them match
+    matcher(filter, node) ||
+    (node.children &&
       node.children.length &&
       !!node.children.find(child => findNode(child, filter, matcher)))
   );
 };
 
 const filterTree = (node, filter, matcher = defaultMatcher) => {
-  // If im an exact match then all my children get to stay
   if (matcher(filter, node) || !node.children) {
     return node;
   }
-  // If not then only keep the ones that match or have matching descendants
   const filtered = node.children
     .filter(child => findNode(child, filter, matcher))
     .map(child => filterTree(child, filter, matcher));
@@ -34,7 +33,6 @@ const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
     findNode(child, filter, matcher)
   );
   const shouldExpand = childrenWithMatches.length > 0;
-  // If im going to expand, go through all the matches and see if thier children need to expand
   if (shouldExpand) {
     children = childrenWithMatches.map(child => {
       return expandFilteredNodes(child, filter, matcher);
@@ -47,25 +45,28 @@ const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
 };
 
 const onFilterMouseUp = (e, initTree, onFilter) => {
-  const filter = e.target.value.trim();
-  if (!filter) {
-    console.log("filter 없음!");
+  const filterName = e.target.value.trim();
+  if (!filterName) {
     // 없으면 처음 쌩 데이터를 받아와야 한다
     return onFilter(initTree);
   }
-  var filtered = filterTree(initTree, filter);
-  filtered = expandFilteredNodes(filtered, filter);
+  var filtered = filterTree(initTree, filterName);
+  filtered = expandFilteredNodes(filtered, filterName);
   onFilter(filtered);
-  // this.setState({ data: filtered });
 };
 
 const Search = ({ initTree, onFilter }) => {
   return (
-    <input
-      type="text"
-      onKeyUp={e => onFilterMouseUp(e, initTree, onFilter)}
-      placeholder="Input!"
-    />
+    <style.InputWrapper>
+      <style.Input
+        type="text"
+        onKeyUp={e => onFilterMouseUp(e, initTree, onFilter)}
+        placeholder="Input!"
+      />
+      <style.Button>
+        <style.SearchIcon />
+      </style.Button>
+    </style.InputWrapper>
   );
 };
 
