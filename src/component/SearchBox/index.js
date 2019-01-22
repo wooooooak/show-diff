@@ -21,13 +21,13 @@ const filterTree = (node, filter, matcher = defaultMatcher) => {
   const filtered = node.children
     .filter(child => findNode(child, filter, matcher))
     .map(child => filterTree(child, filter, matcher));
-  return { ...node, children: filtered };
+  return { ...node, ...{ children: filtered } };
 };
 
 const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
   let children = node.children;
   if (!children || children.length === 0) {
-    return { ...node, toggled: false };
+    return { ...node, ...{ toggled: false } };
   }
   const childrenWithMatches = node.children.filter(child =>
     findNode(child, filter, matcher)
@@ -38,7 +38,7 @@ const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
       return expandFilteredNodes(child, filter, matcher);
     });
   }
-  return { ...node, ...children, toggld: shouldExpand };
+  return { ...node, ...{ children: children, toggled: shouldExpand } };
 };
 
 const onFilterMouseUp = (e, initTree, onFilter) => {
@@ -54,7 +54,7 @@ const onFilterMouseUp = (e, initTree, onFilter) => {
   }
 };
 
-const SearchBox = ({ initTree, onFilter }) => {
+const Search = ({ initTree, onFilter }) => {
   return (
     <style.InputWrapper>
       <style.Input
@@ -69,4 +69,4 @@ const SearchBox = ({ initTree, onFilter }) => {
   );
 };
 
-export default SearchBox;
+export default Search;

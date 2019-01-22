@@ -17,12 +17,13 @@ const GlobalStyle = createGlobalStyle`
 class AppContainer extends Component {
   state = {
     initTree: {},
-    cursor: {},
-    content: [],
+    diffContent: [],
     diffLoading: false,
     summary: {},
     mode: "mod",
-    tree: {}
+    tree: {
+      cursor: {}
+    }
   };
 
   componentDidMount = async () => {
@@ -30,6 +31,7 @@ class AppContainer extends Component {
     const treeData = await axios.get(`http://localhost:3001/list/mod`);
     const newTree = treeData.data.tree;
     newTree.toggled = true;
+    newTree.active = true;
     this.setState({
       summary: data,
       tree: newTree,
@@ -41,15 +43,18 @@ class AppContainer extends Component {
     this.setState({
       diffLoading: true
     });
-    const { data } = await axios.get("http://localhost:3001/diff_file", {
+    const { data } = await axios.get("http://localhost:3001/file/diff", {
       params: {
         path: cursor.path
       }
     });
     this.setState({
-      cursor,
-      content: data.content,
-      diffLoading: false
+      diffContent: data.content,
+      diffLoading: false,
+      tree: {
+        ...this.state.tree,
+        cursor
+      }
     });
   };
 
@@ -59,7 +64,7 @@ class AppContainer extends Component {
       mode,
       tree: data.tree,
       initTree: data.tree,
-      content: []
+      diffContent: []
     });
   };
 
@@ -70,7 +75,14 @@ class AppContainer extends Component {
   };
 
   render() {
-    const { content, summary, diffLoading, mode, tree, initTree } = this.state;
+    const {
+      diffContent,
+      summary,
+      diffLoading,
+      mode,
+      tree,
+      initTree
+    } = this.state;
     return (
       <div>
         <Summary summary={summary} onChangeMode={this.onChangeMode} />
@@ -83,8 +95,9 @@ class AppContainer extends Component {
             mode={mode}
             tree={tree}
             initTree={initTree}
+            cursor={tree.cursor}
           />
-          <DiffViewer content={content} loading={diffLoading} />
+          <DiffViewer content={diffContent} loading={diffLoading} />
           <FolderList
             onClickFile={this.onClickLeafFile}
             mode={mode}

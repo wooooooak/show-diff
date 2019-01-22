@@ -11,10 +11,9 @@ export const Pre = styled.pre`
   overflow: scroll;
   background-color: #f4f5f9;
   ::-webkit-scrollbar {
-    width: 10px; /* remove scrollbar space */
-    background: transparent; /* optional: just make scrollbar invisible */
+    width: 10px;
+    background: transparent;
   }
-  /* optional: show position indicator in red */
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }

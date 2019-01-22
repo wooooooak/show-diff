@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { Treebeard } from "react-treebeard";
+import defaultTheme from "react-treebeard/src/themes/default";
 
 import * as style from "./style";
 import SearchBox from "../SearchBox";
+
+// defaultTheme.tree.node.base = { cursor: "pointer" };
+defaultTheme.tree.node.base.cursor = "pointer";
+defaultTheme.tree.base.fontSize = "18px";
 
 class FolderList extends Component {
   onToggle = (node, toggled) => {
     node.active = true;
     if (node.children) {
-      // 디렉터리일 경우 toggle하는 것
       node.toggled = toggled;
     }
-    const newState = this.props.tree;
-    newState.cursor = node;
     if (node.type === "file") {
       this.props.onClickFile(node);
     }
-    this.setState({ cursor: node });
+    this.setState({});
   };
 
   render() {
@@ -27,6 +29,7 @@ class FolderList extends Component {
           onFilter={this.props.onFilter}
         />
         <Treebeard
+          style={defaultTheme}
           data={this.props.tree}
           onToggle={this.onToggle}
           clicked={this.onClickFile}

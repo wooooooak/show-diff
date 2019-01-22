@@ -17,7 +17,12 @@ export const Circle = styled.div`
   padding: 10px 10px;
   width: 10em;
   font-size: 2em;
-  background-color: #efffe9;
+  cursor: pointer;
+  /* transition: all 1s; */
+
+  &:hover {
+    box-shadow: 3px 3px 10px greenyellow;
+  }
 `;
 
 export const AddCircle = styled(Circle)`
@@ -25,7 +30,7 @@ export const AddCircle = styled(Circle)`
 `;
 
 export const DelCircle = styled(Circle)`
-  /* background-color: #FFFFF2; */
+  background-color: #efffe9;
 `;
 
 export const ModCircle = styled(Circle)`

@@ -1,5 +1,6 @@
 import React from "react";
 import * as styled from "./style";
+import LoadingDots from "../LoadingDots";
 
 const mapContentToTag = contentArr => {
   return contentArr.map((content, index) => {
@@ -31,7 +32,11 @@ const mapContentToTag = contentArr => {
 
 const DiffViewer = ({ content, loading }) => {
   if (loading) {
-    return <styled.LoadingBox> hello </styled.LoadingBox>;
+    return (
+      <styled.Pre>
+        <LoadingDots />
+      </styled.Pre>
+    );
   }
   return <styled.Pre>{mapContentToTag(content)}</styled.Pre>;
 };
