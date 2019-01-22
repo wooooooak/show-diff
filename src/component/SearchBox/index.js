@@ -38,7 +38,7 @@ const expandFilteredNodes = (node, filter, matcher = defaultMatcher) => {
       return expandFilteredNodes(child, filter, matcher);
     });
   }
-  return;
+  return { ...node, ...children, toggld: shouldExpand };
 };
 
 const onFilterMouseUp = (e, initTree, onFilter) => {
