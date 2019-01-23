@@ -8,6 +8,7 @@ export const Pre = styled.pre`
   flex: 6;
   height: 87vh;
   margin-right: 1em;
+  border-radius: 10px;
   overflow: scroll;
   background-color: #f4f5f9;
   ::-webkit-scrollbar {
@@ -15,7 +16,15 @@ export const Pre = styled.pre`
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #ff0000;
+    background: #e53a40;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   }
 `;
 

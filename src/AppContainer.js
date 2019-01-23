@@ -1,18 +1,14 @@
 import React, { Component } from "react";
-import { createGlobalStyle } from "styled-components";
+
 import axios from "axios";
 
+import AppStyle from "./AppStyle";
 import DiffViewer from "./component/DiffViewer";
 import FolderList from "./component/FolderList";
 import HomePage from "./page/HomePage";
 import Summary from "./component/Summary";
 
-const GlobalStyle = createGlobalStyle`
-  body {
-	  margin: 0;
-	  background-color: #21252B;
-  }
-`;
+import API from "./API";
 
 class AppContainer extends Component {
   state = {
@@ -27,8 +23,8 @@ class AppContainer extends Component {
   };
 
   componentDidMount = async () => {
-    const { data } = await axios.get("http://localhost:3001/summary");
-    const treeData = await axios.get(`http://localhost:3001/list/mod`);
+    const { data } = await API.get(`file/summary`);
+    const treeData = await API.get(`tree/mod`);
     const newTree = treeData.data.tree;
     newTree.toggled = true;
     newTree.active = true;
@@ -43,7 +39,7 @@ class AppContainer extends Component {
     this.setState({
       diffLoading: true
     });
-    const { data } = await axios.get("http://localhost:3001/file/diff", {
+    const { data } = await API.get("file/diff", {
       params: {
         path: cursor.path
       }
@@ -59,7 +55,7 @@ class AppContainer extends Component {
   };
 
   onChangeMode = async mode => {
-    const { data } = await axios.get(`http://localhost:3001/list/${mode}`);
+    const { data } = await API.get(`tree/${mode}`);
     this.setState({
       mode,
       tree: data.tree,
@@ -88,7 +84,7 @@ class AppContainer extends Component {
         <Summary summary={summary} onChangeMode={this.onChangeMode} />
 
         <HomePage>
-          <GlobalStyle />
+          <AppStyle />
           <FolderList
             onClickFile={this.onClickLeafFile}
             onFilter={this.onFilter}

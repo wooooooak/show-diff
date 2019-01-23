@@ -1,7 +1,7 @@
 import React from "react";
 import * as styled from "./style";
 import LoadingDots from "../LoadingDots";
-
+import Loader from "react-loader-spinner";
 const mapContentToTag = contentArr => {
   return contentArr.map((content, index) => {
     const { v1Line, v2Line, symbol, string } = content;
@@ -27,8 +27,6 @@ const mapContentToTag = contentArr => {
     );
   });
 };
-
-// const show
 
 const DiffViewer = ({ content, loading }) => {
   if (loading) {
