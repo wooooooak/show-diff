@@ -35,27 +35,36 @@ class AppContainer extends Component {
     });
   };
 
-  onClickLeafFile = async cursor => {
-    this.setState({
-      diffLoading: true
-    });
-    const { data } = await API.get("file/diff", {
-      params: {
-        path: cursor.path
-      }
-    });
-    const tempHistory = this.state.history;
-    tempHistory.splice(0, 0, { name: cursor.name, path: cursor.path });
+  isClickCurrentFile = cursor => {
+    if (this.state.history[0] && cursor.path === this.state.history[0].path) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-    this.setState({
-      diffContent: data.content,
-      diffLoading: false,
-      tree: {
-        ...this.state.tree,
-        cursor
-      },
-      history: tempHistory
-    });
+  onClickLeafFile = async cursor => {
+    if (!this.isClickCurrentFile(cursor)) {
+      this.setState({
+        diffLoading: true
+      });
+      const { data } = await API.get("file/diff", {
+        params: {
+          path: cursor.path
+        }
+      });
+      const tempHistory = this.state.history;
+      tempHistory.splice(0, 0, { name: cursor.name, path: cursor.path });
+      this.setState({
+        diffContent: data.content,
+        diffLoading: false,
+        tree: {
+          ...this.state.tree,
+          cursor
+        },
+        history: tempHistory
+      });
+    }
   };
 
   onChangeMode = async mode => {

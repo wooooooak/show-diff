@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
   width: 100vh;
   text-align: center;
   margin: 25px auto 15px;
-  /* margin-top: 15px; */
   display: flex;
   justify-content: center;
 `;
@@ -18,19 +17,25 @@ export const Circle = styled.div`
   width: 100%;
   font-size: 2em;
   cursor: pointer;
+`;
+
+export const ModCircle = styled(Circle)`
+  background-color: #fffff2;
   &:hover {
-    box-shadow: 3px 3px 10px greenyellow;
+    box-shadow: 3px 3px 20px #f4f7f7;
   }
 `;
 
 export const AddCircle = styled(Circle)`
   background-color: #ee7785;
+  &:hover {
+    box-shadow: 3px 3px 20px #ef5285;
+  }
 `;
 
 export const DelCircle = styled(Circle)`
   background-color: #efffe9;
-`;
-
-export const ModCircle = styled(Circle)`
-  background-color: #fffff2;
+  &:hover {
+    box-shadow: 3px 3px 20px #abd0ce;
+  }
 `;

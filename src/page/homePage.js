@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const PageWrapper = styled.div`
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  padding: 0 50px;
 `;
 
 const HomePage = ({ children }) => <PageWrapper>{children}</PageWrapper>;

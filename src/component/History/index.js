@@ -2,8 +2,6 @@ import React from "react";
 import FlipMove from "react-flip-move";
 import * as style from "./style";
 
-let uniqId = 1;
-
 const genUniqKey = (str, id) => {
   return str + id;
 };
@@ -34,12 +32,12 @@ const mapHistoryToCard = (history, onClickHistoryCard) => {
 };
 
 const History = ({ history, onClickHistoryCard }) => {
-  console.log(history);
   return (
     <style.Container>
-      {/* <FlipMove enterAnimation="accordionVertical" verticalAlignment="top"> */}
-      {mapHistoryToCard(history, onClickHistoryCard)}
-      {/* </FlipMove> */}
+      <style.Title>HISTORY</style.Title>
+      {history.length > 0
+        ? mapHistoryToCard(history, onClickHistoryCard)
+        : null}
     </style.Container>
   );
 };

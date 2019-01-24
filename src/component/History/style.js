@@ -1,6 +1,9 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const borderPx = "6px";
 
 export const Container = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
   flex: 2;
   max-width: 100%;
   margin-top: 20px;
@@ -15,8 +18,26 @@ const expand = keyframes`
     height: 0px;
   }
   to {
-    width: 100%;
+    width: 97%;
     height: 3em;
+  }
+`;
+
+const coloringAnimation = keyframes`
+  25% {
+    border: ${borderPx} solid #45d9fd;
+  }
+
+  50% {
+    border: ${borderPx} solid #fbd14b;
+  }
+
+  75% {
+    border: ${borderPx} solid #3ac569;
+  }
+
+  100% {
+    border: ${borderPx} solid #f1404b;
   }
 `;
 
@@ -36,7 +57,8 @@ const Card = styled.div`
 
 export const CurrentCard = styled(Card)`
   height: 0px;
-  animation: ${expand} 0.5s linear forwards;
+  animation: ${expand} 0.4s linear forwards,
+    ${coloringAnimation} 0.8s 0.5s linear forwards;
   border: 5px solid #47b8e0;
 `;
 
@@ -45,7 +67,14 @@ export const RemainCard = styled(Card)`
 `;
 
 export const Name = styled.p`
-  font-family: "Noto Sans KR", sans-serif;
   margin: auto 0;
   font-size: 1.2em;
+`;
+
+export const Title = styled.div`
+  font-size: 2em;
+  color: white;
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 10px;
 `;

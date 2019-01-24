@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 
 const BounceAnimation = keyframes`
-  from { transform: scale(2);
-    margin-bottom: 0px;
-   }
-  to { transform: scale(200);
-    margin-bottom: 10px;
-   }
-  /* 100% { transform: scale(3); } */
+  0% { margin-bottom: 0; }
+  50% { margin-bottom: 15px }
+  100% { margin-bottom: 0; }
 `;
 
 const DotWrapper = styled.div`
@@ -23,9 +19,8 @@ const Dot = styled.div`
   width: 10px;
   height: 10px;
   margin: 0 5px;
-  /* Animation */
-  animation: ${BounceAnimation} 0.01s linear infinite;
-  /* animation-delay: ${props => props.delay}; */
+  animation: ${BounceAnimation} 0.5s linear infinite;
+  animation-delay: ${props => props.delay};
 `;
 
 class LoadingDots extends Component {
