@@ -1,16 +1,17 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
+const boxTemplate = css`
+  flex: 6;
+  border-radius: 10px;
+  align-items: center;
+  background-color: #f4f5f9;
+  margin-bottom: 10px;
 `;
 
 export const Pre = styled.pre`
-  flex: 6;
   height: 87vh;
-  margin-right: 1em;
-  border-radius: 10px;
   overflow: scroll;
-  background-color: #f4f5f9;
+  ${boxTemplate}
   ::-webkit-scrollbar {
     width: 10px;
     background: transparent;
@@ -24,12 +25,25 @@ export const Pre = styled.pre`
   }
 
   ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 0px rgba(0, 0, 0, 0.3);
   }
 `;
 
-export const LoadingBox = styled(Pre)`
-  text-align: center;
+export const EmptyPre = styled.div`
+  font-family: "Nanum Gothic", sans-serif;
+  ${boxTemplate}
+  display: flex;
+  justify-content: center;
+  font-size: 4em;
+`;
+
+export const LineContainer = styled.div`
+  display: flex;
+  &:hover {
+    span {
+      background: #f0e5de !important;
+    }
+  }
 `;
 
 export const LineCounter = styled.span`

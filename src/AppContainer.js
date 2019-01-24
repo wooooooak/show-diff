@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import axios from "axios";
-
 import AppStyle from "./AppStyle";
 import DiffViewer from "./component/DiffViewer";
 import FolderList from "./component/FolderList";
@@ -9,6 +7,7 @@ import HomePage from "./page/HomePage";
 import Summary from "./component/Summary";
 
 import API from "./API";
+import History from "./component/History";
 
 class AppContainer extends Component {
   state = {
@@ -19,7 +18,8 @@ class AppContainer extends Component {
     mode: "mod",
     tree: {
       cursor: {}
-    }
+    },
+    history: []
   };
 
   componentDidMount = async () => {
@@ -44,13 +44,17 @@ class AppContainer extends Component {
         path: cursor.path
       }
     });
+    const tempHistory = this.state.history;
+    tempHistory.splice(0, 0, { name: cursor.name, path: cursor.path });
+
     this.setState({
       diffContent: data.content,
       diffLoading: false,
       tree: {
         ...this.state.tree,
         cursor
-      }
+      },
+      history: tempHistory
     });
   };
 
@@ -77,7 +81,8 @@ class AppContainer extends Component {
       diffLoading,
       mode,
       tree,
-      initTree
+      initTree,
+      history
     } = this.state;
     return (
       <div>
@@ -94,10 +99,9 @@ class AppContainer extends Component {
             cursor={tree.cursor}
           />
           <DiffViewer content={diffContent} loading={diffLoading} />
-          <FolderList
-            onClickFile={this.onClickLeafFile}
-            mode={mode}
-            tree={{}}
+          <History
+            history={history}
+            onClickHistoryCard={this.onClickLeafFile}
           />
         </HomePage>
       </div>

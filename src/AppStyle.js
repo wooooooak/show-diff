@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 
 const AppStyle = createGlobalStyle`
   body {
+  @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
+  @import url("https://fonts.googleapis.com/css?family=Nanum+Gothic:700");
 	  margin: 0;
 	  background-color: #21252B;
   }

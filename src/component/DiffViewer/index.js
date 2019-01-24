@@ -1,7 +1,6 @@
 import React from "react";
 import * as styled from "./style";
 import LoadingDots from "../LoadingDots";
-import Loader from "react-loader-spinner";
 const mapContentToTag = contentArr => {
   return contentArr.map((content, index) => {
     const { v1Line, v2Line, symbol, string } = content;
@@ -15,7 +14,7 @@ const mapContentToTag = contentArr => {
       contentColor = "#F7AA97";
     }
     return (
-      <styled.Container key={index}>
+      <styled.LineContainer key={index}>
         <styled.LineCounter backgroundColor={lineCounterColor}>
           {v1Line} {v2Line}
         </styled.LineCounter>{" "}
@@ -23,7 +22,7 @@ const mapContentToTag = contentArr => {
           {" "}
           {symbol} {string}
         </styled.StringContent>
-      </styled.Container>
+      </styled.LineContainer>
     );
   });
 };
@@ -36,7 +35,11 @@ const DiffViewer = ({ content, loading }) => {
       </styled.Pre>
     );
   }
-  return <styled.Pre>{mapContentToTag(content)}</styled.Pre>;
+  return content.length !== 0 ? (
+    <styled.Pre>{mapContentToTag(content)}</styled.Pre>
+  ) : (
+    <styled.EmptyPre>좌측 파일을 클릭하세요!</styled.EmptyPre>
+  );
 };
 
 export default DiffViewer;
