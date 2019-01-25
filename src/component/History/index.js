@@ -1,5 +1,4 @@
 import React from "react";
-import FlipMove from "react-flip-move";
 import * as style from "./style";
 
 const genUniqKey = (str, id) => {
@@ -13,7 +12,6 @@ const mapHistoryToCard = (history, onClickHistoryCard) => {
       return (
         <style.CurrentCard
           key={genUniqKey(el.name, uniqId++)}
-          // backgroundColor="blue"
           onClick={() => onClickHistoryCard(el)}
         >
           <style.Name>{el.name}</style.Name>
@@ -31,10 +29,20 @@ const mapHistoryToCard = (history, onClickHistoryCard) => {
   });
 };
 
-const History = ({ history, onClickHistoryCard }) => {
+const History = ({ history, onClickHistoryCard, clearHistory }) => {
+  let clearButtonVisible = "hidden";
+  if (history.length > 0) {
+    clearButtonVisible = "visible";
+  }
   return (
     <style.Container>
-      <style.Title>HISTORY</style.Title>
+      <style.TitleBar>
+        <style.Title>HISTORY</style.Title>
+        <style.ClearButton
+          visibility={clearButtonVisible}
+          onClick={clearHistory}
+        />
+      </style.TitleBar>
       {history.length > 0
         ? mapHistoryToCard(history, onClickHistoryCard)
         : null}

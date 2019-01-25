@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { Reset } from "styled-icons/boxicons-regular/Reset";
 
 const borderPx = "6px";
 
@@ -71,10 +72,31 @@ export const Name = styled.p`
   font-size: 1.2em;
 `;
 
-export const Title = styled.div`
-  font-size: 2em;
+export const TitleBar = styled.div`
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  text-align: center;
-  margin-top: -20px;
+  margin-top: -50px;
   margin-bottom: 10px;
+`;
+export const Title = styled.p`
+  font-size: 2em;
+  text-align: center;
+  margin-left: 30%;
+`;
+
+export const ClearButton = styled(Reset)`
+  visibility: ${props => props.visibility};
+  font-size: 10px;
+  cursor: pointer;
+  margin-left: auto;
+  height: 3em;
+  border: 2px solid white;
+  min-width: 2em;
+  :hover {
+    background: white;
+    color: black;
+  }
 `;

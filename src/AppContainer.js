@@ -22,6 +22,13 @@ class AppContainer extends Component {
     history: []
   };
 
+  onHistoryClearButton = () => {
+    console.log("here");
+    this.setState({
+      history: []
+    });
+  };
+
   componentDidMount = async () => {
     const { data } = await API.get(`file/summary`);
     const treeData = await API.get(`tree/mod`);
@@ -111,6 +118,7 @@ class AppContainer extends Component {
           <History
             history={history}
             onClickHistoryCard={this.onClickLeafFile}
+            clearHistory={this.onHistoryClearButton}
           />
         </HomePage>
       </div>
