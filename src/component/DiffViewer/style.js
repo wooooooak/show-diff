@@ -34,7 +34,11 @@ export const EmptyPre = styled.div`
   ${boxTemplate}
   display: flex;
   justify-content: center;
-  font-size: 4em;
+  font-size: 3.5em;
+
+  @media (max-width: 1300px) {
+    font-size: 2em;
+  }
 `;
 
 export const LineContainer = styled.div`
