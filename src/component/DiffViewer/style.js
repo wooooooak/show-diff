@@ -46,9 +46,22 @@ export const LineContainer = styled.div`
   }
 `;
 
-export const LineCounter = styled.span`
+const UndragableSpan = styled.span`
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+`;
+
+export const LineCounter = styled(UndragableSpan)`
   background-color: ${props => props.backgroundColor};
   padding-right: 3px;
+`;
+
+export const Symbol = styled(UndragableSpan)`
+  background-color: ${props => props.backgroundColor};
+  padding: 0 5px;
 `;
 
 export const StringContent = styled.span`

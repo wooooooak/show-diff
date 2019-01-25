@@ -1,6 +1,7 @@
 import React from "react";
 import * as styled from "./style";
 import LoadingDots from "../LoadingDots";
+
 const mapContentToTag = contentArr => {
   return contentArr.map((content, index) => {
     const { v1Line, v2Line, symbol, string } = content;
@@ -17,10 +18,10 @@ const mapContentToTag = contentArr => {
       <styled.LineContainer key={index}>
         <styled.LineCounter backgroundColor={lineCounterColor}>
           {v1Line} {v2Line}
-        </styled.LineCounter>{" "}
+        </styled.LineCounter>
+        <styled.Symbol backgroundColor={contentColor}>{symbol}</styled.Symbol>
         <styled.StringContent backgroundColor={contentColor}>
-          {" "}
-          {symbol} {string}
+          {string}
         </styled.StringContent>
       </styled.LineContainer>
     );
@@ -30,9 +31,9 @@ const mapContentToTag = contentArr => {
 const DiffViewer = ({ content, loading }) => {
   if (loading) {
     return (
-      <styled.Pre>
+      <styled.EmptyPre>
         <LoadingDots />
-      </styled.Pre>
+      </styled.EmptyPre>
     );
   }
   return content.length !== 0 ? (
