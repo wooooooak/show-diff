@@ -23,7 +23,6 @@ class AppContainer extends Component {
   };
 
   onHistoryClearButton = () => {
-    console.log("here");
     this.setState({
       history: []
     });
@@ -44,6 +43,9 @@ class AppContainer extends Component {
 
   isClickCurrentFile = cursor => {
     if (this.state.history[0] && cursor.path === this.state.history[0].path) {
+      if (cursor.mode && this.state.mode !== cursor.mode) {
+        return false;
+      }
       return true;
     } else {
       return false;
@@ -61,7 +63,11 @@ class AppContainer extends Component {
         }
       });
       const tempHistory = this.state.history;
-      tempHistory.splice(0, 0, { name: cursor.name, path: cursor.path });
+      tempHistory.splice(0, 0, {
+        name: cursor.name,
+        path: cursor.path,
+        mode: this.state.mode
+      });
       this.setState({
         diffContent: data.content,
         diffLoading: false,
@@ -101,7 +107,7 @@ class AppContainer extends Component {
       history
     } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <Summary summary={summary} onChangeMode={this.onChangeMode} />
 
         <HomePage>
@@ -121,7 +127,7 @@ class AppContainer extends Component {
             clearHistory={this.onHistoryClearButton}
           />
         </HomePage>
-      </div>
+      </React.Fragment>
     );
   }
 }

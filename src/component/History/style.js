@@ -81,6 +81,7 @@ export const TitleBar = styled.div`
   margin-top: -50px;
   margin-bottom: 10px;
 `;
+
 export const Title = styled.p`
   font-size: 2em;
   text-align: center;
